@@ -13,7 +13,8 @@ const fileGetter = async () => {
     name: fileName.slice(0, fileName.length - 4),
     URI: fileName,
   }));
-  return { csvFiles: fileData };
+  console.log(fileData);
+  return ({ csvFiles: fileData });
 };
 
 const launchFile = () => ({ uri }) => Launcher.startActivityAsync(

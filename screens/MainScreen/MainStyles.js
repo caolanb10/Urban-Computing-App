@@ -20,11 +20,15 @@ export default StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    height: 120,
+    height: 50,
   },
   button: {
     height: 50,
-    width: 100,
+    width: 150,
+  },
+  buttonContainer: {
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   data: {
 

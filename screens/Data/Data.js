@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import styles from './DataStyles';
 
-const Data = ({ csvFiles, LaunchFile }) => (
+const Data = ({ csvFiles, LaunchFile }) => console.log(csvFiles)||(
   <View>
     {csvFiles.map((file) => (
       <ListItem

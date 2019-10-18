@@ -24,18 +24,23 @@ const MainScreen = (props) => {
       <Text style={styles.title}>
       Welcome Back
       </Text>
-      <Button
-        raised
-        title="View CSV Data"
-        onPress={navigation.navigate('Data')}
-      />
-      <Button
-        raised
-        type={isRecording ? 'outline' : 'solid'}
-        title={isRecording ? 'Stop' : 'Start'}
-        onPress={isRecording ? finish : record}
-        buttonStyle={styles.button}
-      />
+      <View style={styles.buttonContainer}>
+        <Button
+          raised
+          title="View CSV Data"
+          onPress={() => navigation.navigate('Data')}
+          buttonStyle={styles.button}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          raised
+          type={isRecording ? 'outline' : 'solid'}
+          title={isRecording ? 'Stop' : 'Start'}
+          onPress={isRecording ? finish : record}
+          buttonStyle={styles.button}
+        />
+      </View>
       <Text style={styles.data}>
         {`${location.long}   ${location.lat}`}
       </Text>
