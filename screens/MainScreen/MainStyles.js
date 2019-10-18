@@ -12,15 +12,15 @@ export default StyleSheet.create({
     width: fullWidth,
   },
   message: {
-    paddingTop: 50,
-    height: 200,
+    paddingTop: 0,
+    height: 150,
     textAlign: 'center',
     color: 'red',
     fontSize: 30,
   },
   title: {
     textAlign: 'center',
-    height: 150,
+    height: 120,
   },
   button: {
     height: 50,

@@ -5,6 +5,7 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
+import * as IntentLauncher from 'expo-intent-launcher';
 
 import MainScreen from './MainScreen';
 
@@ -50,8 +51,10 @@ const getLocation = async ({ setLocation, recordData, recordedData }) => async (
 const dataHandler = {
   closeFile: ({ recordedData }) => async () => {
     const now = new Date();
-    await FileSystem.writeAsStringAsync(`${CSV_DIRECTORY}/demo ${now}.csv`, `${CSV_HEADER_FULL},${recordedData}`,
+    const filePath = `${CSV_DIRECTORY}/demo ${now}.csv`;
+    await FileSystem.writeAsStringAsync(filePath, `${CSV_HEADER_FULL},${recordedData}`,
       { encoding: UTF8 });
+    const publicFile = await FileSystem.getContentUriAsync(filePath);
   },
   readFile: () => async () => {
     const files = await FileSystem.readDirectoryAsync(CSV_DIRECTORY);

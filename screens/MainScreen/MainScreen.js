@@ -6,39 +6,47 @@ import {
 } from 'react-native-elements';
 import styles from './MainStyles';
 
-const MainScreen = ({
-  isRecording,
-  status,
-  record,
-  finish,
-  location,
-}) => (
-  <View style={styles.page}>
-    <Text style={styles.message}>
-        Welcome Back
-    </Text>
-    <Text style={styles.title}>
-      GPS Location Tracker
-    </Text>
-    <Button
-      raised
-      type={isRecording ? 'outline' : 'solid'}
-      title={isRecording ? 'Stop' : 'Start'}
-      onPress={isRecording ? finish : record}
-      buttonStyle={styles.button}
-    />
-    <Text style={styles.data}>
-      {`${location.long}   ${location.lat}`}
-    </Text>
-    <Text style={styles.status}>
-      {status}
-    </Text>
-  </View>
-);
+const MainScreen = (props) => {
+  const {
+    isRecording,
+    status,
+    record,
+    finish,
+    location,
+    navigation,
+  } = props;
+
+  return (
+    <View style={styles.page}>
+      <Text style={styles.message}>
+        GPS Location Tracker
+      </Text>
+      <Text style={styles.title}>
+      Welcome Back
+      </Text>
+      <Button
+        raised
+        title="View CSV Data"
+        onPress={navigation.navigate('Data')}
+      />
+      <Button
+        raised
+        type={isRecording ? 'outline' : 'solid'}
+        title={isRecording ? 'Stop' : 'Start'}
+        onPress={isRecording ? finish : record}
+        buttonStyle={styles.button}
+      />
+      <Text style={styles.data}>
+        {`${location.long}   ${location.lat}`}
+      </Text>
+      <Text style={styles.status}>
+        {status}
+      </Text>
+    </View>
+  );
+};
 
 MainScreen.propTypes = {
-  startRecording: PropTypes.func.isRequired,
-  stopRecording: PropTypes.func.isRequired,
   isRecording: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     long: PropTypes.string,
