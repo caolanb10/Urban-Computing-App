@@ -4,6 +4,9 @@ import {
 import { readDirectoryAsync, documentDirectory } from 'expo-file-system';
 import { ACTION_TYPES, actionCreators } from './actions';
 
+///////////////
+// Workers ///
+///////////////
 function* newLocation({ coords: { latitude, longitude, accuracy }, timestamp }) {
   yield put(actionCreators.updateLocation({
     latitude, longitude, accuracy, timestamp,
@@ -17,6 +20,9 @@ function* updateCSVFiles() {
   yield put(actionCreators.updateCSVFiles({ csvFiles: files }));
 }
 
+///////////////
+// Watchers //
+//////////////
 function* watchLocationUpdate() {
   yield takeEvery(ACTION_TYPES.NEW_LOCATION, newLocation);
 }
