@@ -4,19 +4,21 @@ import {
 import { readDirectoryAsync, documentDirectory } from 'expo-file-system';
 import { ACTION_TYPES, actionCreators } from './actions';
 
-function* updateLocation({ lat, long }) {
-  yield put(actionCreators.updateLocation({ lat, long }));
+function* newLocation({ coords: { latitude, longitude, accuracy }, timestamp }) {
+  yield put(actionCreators.updateLocation({
+    latitude, longitude, accuracy, timestamp,
+  }));
   yield call(() => console.log('update firebase'));
   yield call(() => console.log('write to file'));
 }
 
 function* updateCSVFiles() {
   const files = yield call(readDirectoryAsync, documentDirectory);
-  yield put(actionCreators.updateCSVFiles({ csvFiles: files }))
+  yield put(actionCreators.updateCSVFiles({ csvFiles: files }));
 }
 
 function* watchLocationUpdate() {
-  yield takeEvery(ACTION_TYPES.UPDATE_LOCATION, updateLocation);
+  yield takeEvery(ACTION_TYPES.NEW_LOCATION, newLocation);
 }
 
 function* watchCSVFilesUpdate() {
@@ -25,6 +27,7 @@ function* watchCSVFilesUpdate() {
 
 export default function* rootSaga() {
   yield all([
+    watchCSVFilesUpdate(),
     watchLocationUpdate(),
   ]);
 }

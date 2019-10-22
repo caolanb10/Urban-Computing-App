@@ -1,10 +1,13 @@
 export const ACTION_TYPES = {
   UPDATE_LOCATION: 'UPDATE_LOCATION',
+  NEW_LOCATION: 'NEW_LOCATION',
   UPDATE_CSV_FILES: 'UPDATE_CSV_FILES',
 };
 
 export const actionCreators = {
-  updateLocation: ({ coords: { latitude, longitude, accuracy }, timestamp }) => ({
+  updateLocation: ({
+    latitude, longitude, accuracy, timestamp,
+  }) => ({
     type: ACTION_TYPES.UPDATE_LOCATION,
     latitude,
     longitude,
