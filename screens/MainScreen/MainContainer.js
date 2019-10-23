@@ -3,10 +3,13 @@ import {
 } from 'recompose';
 import { connect } from 'react-redux';
 import { watchPositionAsync, Accuracy } from 'expo-location';
-import { Actions as actionCreators } from '../../redux';
+import { actionCreators } from '../../redux';
 import MainScreen from './MainScreen';
 
-const mapStateToProps = ({ lat, long }) => ({ lat, long });
+const mapStateToProps = ({ app: { latitude, longitude } }) => ({
+  long: longitude.toString(),
+  lat: latitude.toString(),
+});
 
 const mapDispatchToProps = {
   updateLocation: actionCreators.newLocation,
@@ -27,13 +30,15 @@ const stateHandlers = {
 };
 
 const handlers = {
-  initiateSubscription: async ({ startRecording, registerWatcher, updateLocation }) => {
+  initiateSubscription: ({ startRecording, registerWatcher, updateLocation }) => async () => {
     startRecording();
     const watcher = await watchPositionAsync({ accuracy: Accuracy.Highest, timeInterval: 500 },
-      (location) => updateLocation(location));
+      (location) => { console.log('subscription caller called'); updateLocation(location); });
     registerWatcher({ watcher });
   },
-  stopSubscription: ({ stopRecording, watcher, clearWatcher, triggerUpdateCSVFiles }) => {
+  stopSubscription: ({
+    stopRecording, watcher, clearWatcher, triggerUpdateCSVFiles,
+  }) => () => {
     stopRecording();
     watcher.remove();
     clearWatcher();

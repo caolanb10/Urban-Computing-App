@@ -1,5 +1,7 @@
 import Reducers from './reducers';
-import Actions from './actions';
+import { ACTION_TYPES, actionCreators } from './actions';
 import Sagas from './sagas';
 
-export { Reducers, Actions, Sagas };
+export {
+  Reducers, ACTION_TYPES, actionCreators, Sagas,
+};

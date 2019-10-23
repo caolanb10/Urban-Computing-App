@@ -7,7 +7,8 @@ import { ACTION_TYPES, actionCreators } from './actions';
 ///////////////
 // Workers ///
 ///////////////
-function* newLocation({ coords: { latitude, longitude, accuracy }, timestamp }) {
+function* newLocation({ location: { coords: { latitude, longitude, accuracy }, timestamp } }) {
+  console.log('here', latitude, longitude, accuracy, timestamp);
   yield put(actionCreators.updateLocation({
     latitude, longitude, accuracy, timestamp,
   }));

@@ -1,5 +1,5 @@
 {
-  "main": "./AppEntry.js",
+  "main": "./node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "datejs": "^1.0.0-rc3",
     "expo": "^35.0.0",
     "expo-constants": "~7.0.0",
@@ -37,6 +38,7 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
+    "xml-parser": "^1.2.1",
     "yarn": "^1.19.1"
   },
   "devDependencies": {

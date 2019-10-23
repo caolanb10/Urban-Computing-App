@@ -27,6 +27,5 @@ class Fire {
         alert(message);
       }
     }
-  }
-
+  };
 }

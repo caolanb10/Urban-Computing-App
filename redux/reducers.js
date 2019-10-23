@@ -3,10 +3,10 @@ import { ACTION_TYPES } from './actions';
 
 const INITIAL_STATE = {
   csvFiles: [],
-  latitude: null,
-  longitude: null,
-  accuracy: null,
-  time: null,
+  latitude: '',
+  longitude: '',
+  accuracy: '',
+  time: '',
 };
 
 const appReducer = (state = INITIAL_STATE, action) => {
@@ -14,7 +14,7 @@ const appReducer = (state = INITIAL_STATE, action) => {
     case (ACTION_TYPES.UPDATE_LOCATION):
       return ({
         latitude: action.latitude,
-        longitude: action.latitude,
+        longitude: action.longitude,
         accuracy: action.accuracy,
         time: action.time,
       });
