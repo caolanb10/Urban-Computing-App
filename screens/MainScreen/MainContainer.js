@@ -10,7 +10,7 @@ const mapStateToProps = ({ lat, long }) => ({ lat, long });
 
 const mapDispatchToProps = {
   updateLocation: actionCreators.newLocation,
-  updateCSVFiles: actionCreators.triggerUpdateCSVFiles,
+  triggerUpdateCSVFiles: actionCreators.triggerUpdateCSVFiles,
 };
 
 const initialState = {
@@ -33,11 +33,11 @@ const handlers = {
       (location) => updateLocation(location));
     registerWatcher({ watcher });
   },
-  stopSubscription: ({ stopRecording, watcher, clearWatcher, updateCSVFiles }) => {
+  stopSubscription: ({ stopRecording, watcher, clearWatcher, triggerUpdateCSVFiles }) => {
     stopRecording();
     watcher.remove();
     clearWatcher();
-
+    triggerUpdateCSVFiles();
   },
 };
 

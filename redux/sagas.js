@@ -28,7 +28,7 @@ function* watchLocationUpdate() {
 }
 
 function* watchCSVFilesUpdate() {
-  yield takeEvery(ACTION_TYPES.UPDATE_CSV_FILES, updateCSVFiles);
+  yield takeEvery(ACTION_TYPES.TRIGGER_UPDATE_CSV_FILES, updateCSVFiles);
 }
 
 export default function* rootSaga() {

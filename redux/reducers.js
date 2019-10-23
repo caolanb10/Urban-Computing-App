@@ -20,7 +20,7 @@ const appReducer = (state = INITIAL_STATE, action) => {
       });
     case (ACTION_TYPES.UPDATE_CSV_FILES):
       return ({
-        csvFile: action.csvFiles,
+        csvFiles: action.csvFiles,
       });
     default:
       return state;
