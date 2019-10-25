@@ -4,7 +4,10 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Sagas as rootSaga, Reducers } from './redux';
 import Navigator from './Navigator';
-import { requests } from './requests';
+import { postToDB, postToDB2 } from './Fire';
+
+postToDB();
+postToDB2();
 
 const sagaMiddleware = createSagaMiddleware();
 
