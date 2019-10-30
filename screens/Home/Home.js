@@ -4,7 +4,10 @@ import { View } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import styles from './HomeStyles';
 
-const Home = ({ nearbyStations, allStations }) => (
+
+const Home = ({
+  nearbyStations, allStations, longitude, latitude,
+}) => console.log(longitude, latitude) || (
   <View>
     <Card title="NEARBY STATIONS">
       {/*{nearbyStations.map((station, i) => (
@@ -16,7 +19,6 @@ const Home = ({ nearbyStations, allStations }) => (
       ))}*/}
     </Card>
   </View>
-
 );
 
 const stationsPropTypes = PropTypes.arrayOf(
@@ -28,8 +30,13 @@ const stationsPropTypes = PropTypes.arrayOf(
 );
 
 Home.propTypes = {
-  nearbyStations: stationsPropTypes.isRequired,
-  allStations: stationsPropTypes.isRequired,
+  nearbyStations: stationsPropTypes,
+  allStations: stationsPropTypes,
+};
+
+Home.defaultProps = {
+  nearbyStations: [],
+  allStations: [],
 };
 
 export default Home;

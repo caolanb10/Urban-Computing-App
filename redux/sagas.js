@@ -5,16 +5,28 @@ import { Accuracy, watchPositionAsync } from 'expo-location';
 import { requests, constants, Database } from '../Firebase';
 import { actionCreators } from './actions';
 
-///////////////
-// Workers ///
-///////////////
-
-function* newLocation({ location: { coords: { latitude, longitude, accuracy }, timestamp } }) {
-  console.log('here', latitude, longitude, accuracy, timestamp);
+function* putUpdate({
+  latitude, longitude, accuracy, timestamp,
+}) {
+  console.log('in generator');
+  console.log('args', {
+    latitude, longitude, accuracy, timestamp,
+  });
   yield put(actionCreators.updateLocation({
     latitude, longitude, accuracy, timestamp,
   }));
 }
+
+function newLocation({ coords: { latitude, longitude, accuracy }, timestamp }) {
+  console.log('here', latitude, longitude, accuracy, timestamp);
+  putUpdate({
+    latitude, longitude, accuracy, timestamp,
+  }).next();
+}
+
+///////////////
+// Workers ///
+///////////////
 
 function* startWatchingLocation() {
   yield call(watchPositionAsync, { accuracy: Accuracy.Highest, timeInterval: 500 }, newLocation);

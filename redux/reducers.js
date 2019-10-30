@@ -13,6 +13,7 @@ const INITIAL_STATE = {
 const appReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case (ACTION_TYPES.UPDATE_LOCATION):
+      console.log('update location received');
       return ({
         latitude: action.latitude,
         longitude: action.longitude,
