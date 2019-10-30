@@ -1,9 +1,9 @@
 import { compose, withProps, withStateHandlers } from 'recompose';
-import Info from './Info';
+import Home from './Home';
 
 const initialState = {};
 
 const handlers = {};
 
 export default compose(
-)(Info);
+)(Home);

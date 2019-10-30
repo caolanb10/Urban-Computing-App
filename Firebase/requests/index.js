@@ -10,12 +10,12 @@ const makeRequest = async (endPoint) => {
 };
 
 const jsonParser = (data) => (
-  data.root.children.map((station) => station.children.reduce((acc, element) => ({ ...acc, [element.name]: element.content }), {})));
+  data.root.children.map((station) => station.children.reduce((acc, element) => ({ ...acc, [element.name]: element.content === undefined ? null : element.content }), {})));
 
 
 const requests = {
   getAllStations: async () => jsonParser(await makeRequest(EndPoints.getAllStations)),
-  getAllStationsByType: async ({ type }) => jsonParser(await makeRequest(EndPoints.getAllStationsByType)({ type })),
+  getAllStationsByType: async ({ type }) => jsonParser(await (await makeRequest(EndPoints.getAllStationsByType))({ type })),
   getCurrentTrains: async () => jsonParser(await makeRequest(EndPoints.getCurrentTrains)),
   getCurrentTrainsByType: async ({ type }) => jsonParser(await makeRequest(EndPoints.getCurrentTrainsByType({ type }))),
   getStationDataByName: async ({ name }) => jsonParser(await makeRequest(EndPoints.getStationDataByName({ name }))),
@@ -26,4 +26,4 @@ const requests = {
   getTrainMovements: async ({ id, dateString }) => jsonParser(await makeRequest(EndPoints.getTrainMovements({ id, dateString }))),
 };
 
-export { requests };
+export default requests;

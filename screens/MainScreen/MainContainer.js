@@ -2,7 +2,6 @@ import {
   compose, withStateHandlers, withHandlers,
 } from 'recompose';
 import { connect } from 'react-redux';
-import { watchPositionAsync, Accuracy } from 'expo-location';
 import { actionCreators } from '../../redux';
 import MainScreen from './MainScreen';
 
@@ -11,39 +10,17 @@ const mapStateToProps = ({ app: { latitude, longitude } }) => ({
   lat: latitude.toString(),
 });
 
-const mapDispatchToProps = {
-  updateLocation: actionCreators.newLocation,
-  triggerUpdateCSVFiles: actionCreators.triggerUpdateCSVFiles,
-};
+const mapDispatchToProps = { };
 
-const initialState = {
-  isRecording: false,
-  status: 'Ready',
-  watcher: null,
-};
+const initialState = { };
 
-const stateHandlers = {
-  startRecording: () => () => ({ isRecording: true, status: 'Recording' }),
-  stopRecording: () => () => ({ isRecording: false, status: 'Finished ' }),
-  registerWatcher: () => ({ watcher }) => ({ watcher }),
-  clearWatcher: () => () => ({ watcher: null }),
-};
+const stateHandlers = { };
 
 const handlers = {
-  initiateSubscription: ({ startRecording, registerWatcher, updateLocation }) => async () => {
-    startRecording();
-    const watcher = await watchPositionAsync({ accuracy: Accuracy.Highest, timeInterval: 500 },
-      (location) => { console.log('subscription caller called'); updateLocation(location); });
-    registerWatcher({ watcher });
-  },
+  initiateSubscription: ({ startRecording, registerWatcher, updateLocation }) => async () => {},
   stopSubscription: ({
     stopRecording, watcher, clearWatcher, triggerUpdateCSVFiles,
-  }) => () => {
-    stopRecording();
-    watcher.remove();
-    clearWatcher();
-    triggerUpdateCSVFiles();
-  },
+  }) => () => { },
 };
 
 export default compose(

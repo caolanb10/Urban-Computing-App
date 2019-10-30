@@ -3,6 +3,7 @@ import { ACTION_TYPES } from './actions';
 
 const INITIAL_STATE = {
   csvFiles: [],
+  stations: [],
   latitude: '',
   longitude: '',
   accuracy: '',
@@ -21,6 +22,10 @@ const appReducer = (state = INITIAL_STATE, action) => {
     case (ACTION_TYPES.UPDATE_CSV_FILES):
       return ({
         csvFiles: action.csvFiles,
+      });
+    case (ACTION_TYPES.UPDATE_STATION_LIST):
+      return ({
+        stations: action.stations,
       });
     default:
       return state;

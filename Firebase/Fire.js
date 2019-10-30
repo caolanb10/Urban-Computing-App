@@ -1,7 +1,5 @@
 import * as firebase from 'firebase';
 
-const DATABASE_REFERENCE = 'PLACEHOLDER';
-
 export const app = firebase.initializeApp({
   apiKey: 'AIzaSyA8NigRryFu6RCagi6JS1-lnYLyqyQwCVI',
   authDomain: 'urban-application-7f91a.firebaseapp.com',
@@ -22,16 +20,10 @@ export const observeAuth = () => firebase.auth().onAuthStateChanged((user) => {
   }
 });
 
+export const ref = ({ table }) => firebase.database().ref(table);
+
 export const uid = () => (firebase.auth().currentUser || {}).uid;
 
-export const ref = () => firebase.database().ref(DATABASE_REFERENCE);
+export const postToDB = ({ data, table }) => firebase.database().ref(table).push({ data });
 
-export const postToDB = () => ref().push({
-  message: 'sampleData',
-});
-
-export const postToDB2 = () => ref().set({
-  message1: 'sampleData3',
-});
-
-// export const readFromDB = () => ref().
+export const setToDB = ({ data, table }) => firebase.database().ref(table).set(data);
