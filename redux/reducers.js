@@ -8,11 +8,12 @@ const INITIAL_STATE = {
   longitude: '',
   accuracy: '',
   time: '',
-  stationData: '',
+  stationData: [],
   station: '',
 };
 
 const appReducer = (state = INITIAL_STATE, action) => {
+  console.log('################################', action);
   switch (action.type) {
     case (ACTION_TYPES.UPDATE_LOCATION):
       console.log('update location received', action);
