@@ -8,12 +8,14 @@ const INITIAL_STATE = {
   longitude: '',
   accuracy: '',
   time: '',
+  stationData: '',
+  station: '',
 };
 
 const appReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case (ACTION_TYPES.UPDATE_LOCATION):
-      console.log('update location received');
+      console.log('update location received', action);
       return ({
         latitude: action.latitude,
         longitude: action.longitude,
@@ -25,8 +27,14 @@ const appReducer = (state = INITIAL_STATE, action) => {
         csvFiles: action.csvFiles,
       });
     case (ACTION_TYPES.UPDATE_STATION_LIST):
+      console.log('in reducer', action);
       return ({
         stations: action.stations,
+      });
+    case (ACTION_TYPES.RECEIVED_DATA):
+      return ({
+        stationData: action.stationData,
+        station: action.station,
       });
     default:
       return state;

@@ -1,22 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
+import DropDown from 'react-native-modal-dropdown';
 import { Card, Button } from 'react-native-elements';
 import styles from './HomeStyles';
 
 
 const Home = ({
-  nearbyStations, allStations, longitude, latitude,
-}) => console.log(longitude, latitude) || (
+  nearbyStations,
+  allStations,
+  longitude,
+  latitude,
+  time,
+  stationNavigationHandler,
+  startWatchingLocation,
+}) => console.log('stations', allStations) || (
   <View>
-    <Card title="NEARBY STATIONS">
-      {/*{nearbyStations.map((station, i) => (
-        <View key={i} style={styles.stationList}>
-          <Button style={styles.stationName}>
-            {station.name}
-          </Button>
-        </View>
-      ))}*/}
+    <Card containerStyle={styles.cardStyle}>
+      <Button
+        containerStyle={{ margin: 15 }}
+        onPress={startWatchingLocation}
+        title="Location"
+      />
+      <Card title="Nearby Stations" containerStyle={styles.cardStyle}>
+        <DropDown
+          dropdownTextStyle={styles.dropdownTextStyle}
+          dropdownStyle={styles.dropdownStyle}
+          options={nearbyStations.map(({ name }) => name)}
+          onSelect={stationNavigationHandler}
+        />
+      </Card>
+      <Card title="All Stations" containerStyle={styles.cardStyle}>
+        <DropDown
+          dropdownTextStyle={styles.dropdownTextStyle}
+          dropdownStyle={styles.dropdownStyle}
+          options={allStations.map(({ name }) => name)}
+          onSelect={stationNavigationHandler}
+        />
+      </Card>
     </Card>
   </View>
 );

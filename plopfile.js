@@ -22,6 +22,11 @@ module.exports = function (plop) {
       path: 'screens/{{name}}/{{name}}Styles.js',
       templateFile: 'templates/stylesTemplate.hbs',
     },
+    {
+      type: 'add',
+      path: 'screens/{{name}}/index.js',
+      templateFile: 'templates/indexTemplate.hbs',
+    },
     ],
   });
   plop.setGenerator('Component Generator', {
