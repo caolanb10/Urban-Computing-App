@@ -12,7 +12,7 @@ export const TrainPropType = PropTypes.shape({
   Duein: PropTypes.string.isRequired,
   Exparrival: PropTypes.string.isRequired,
   Expdepart: PropTypes.string.isRequired,
-  Lastlocation: PropTypes.oneOfType([PropTypes.string, PropTypes.null]),
+  Lastlocation: PropTypes.string,
   Late: PropTypes.string.isRequired,
   Locationtype: PropTypes.string.isRequired,
   Origin: PropTypes.string.isRequired,

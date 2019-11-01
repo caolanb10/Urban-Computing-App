@@ -1,3 +1,4 @@
 export default {
-  STATION_LIST: 'Station_List',
+  STATION_LIST: 'STATION_LIST',
+  LOCATION_UPDATES: 'LOCATION_UPDATES',
 };

@@ -5,28 +5,27 @@ import DropDown from 'react-native-modal-dropdown';
 import { Card, Button } from 'react-native-elements';
 import styles from './HomeStyles';
 
-
 const Home = ({
   nearbyStations,
   allStations,
-  longitude,
-  latitude,
-  time,
   stationNavigationHandler,
+  isTracking,
   startWatchingLocation,
-}) => console.log('stations', allStations) || (
+  stopWatchingLocation,
+}) => (
   <View>
     <Card containerStyle={styles.cardStyle}>
       <Button
+        type={isTracking ? 'outline' : 'solid'}
         containerStyle={{ margin: 15 }}
-        onPress={startWatchingLocation}
-        title="Location"
+        onPress={isTracking ? stopWatchingLocation : startWatchingLocation}
+        title={isTracking ? 'Searching For Nearby Stations' : 'Find Stations Near Me'}
       />
       <Card title="Nearby Stations" containerStyle={styles.cardStyle}>
         <DropDown
           dropdownTextStyle={styles.dropdownTextStyle}
           dropdownStyle={styles.dropdownStyle}
-          options={nearbyStations.map(({ name }) => name)}
+          options={nearbyStations.map(({ StationDesc }) => StationDesc)}
           onSelect={stationNavigationHandler}
         />
       </Card>
@@ -34,7 +33,7 @@ const Home = ({
         <DropDown
           dropdownTextStyle={styles.dropdownTextStyle}
           dropdownStyle={styles.dropdownStyle}
-          options={allStations.map(({ name }) => name)}
+          options={allStations.map(({ StationDesc }) => StationDesc)}
           onSelect={stationNavigationHandler}
         />
       </Card>
@@ -44,9 +43,12 @@ const Home = ({
 
 const stationsPropTypes = PropTypes.arrayOf(
   PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    lat: PropTypes.number.isRequired,
-    long: PropTypes.number.isRequired,
+    StationAlias: PropTypes.string,
+    StationCode: PropTypes.string.isRequired,
+    StationDesc: PropTypes.string.isRequired,
+    StationId: PropTypes.string.isRequired,
+    StationLatitude: PropTypes.string.isRequired,
+    StationLongitude: PropTypes.string.isRequired,
   }),
 );
 
@@ -58,6 +60,7 @@ Home.propTypes = {
 Home.defaultProps = {
   nearbyStations: [],
   allStations: [],
+  StationAlias: null,
 };
 
 export default Home;

@@ -1,4 +1,5 @@
- Object {
+// Train
+Object {
     "Destination": "Bray",
     "Destinationtime": "19:57",
     "Direction": "Southbound",
@@ -20,4 +21,14 @@
     "Traincode": "E252 ",
     "Traindate": "01 Nov 2019",
     "Traintype": "DART",
+  },
+
+// Station
+Object {
+    "StationAlias": null,
+    "StationCode": "MYNTH",
+    "StationDesc": "Maynooth",
+    "StationId": "91",
+    "StationLatitude": "53.378",
+    "StationLongitude": "-6.58993",
   },

@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 };
 
 const appReducer = (state = INITIAL_STATE, action) => {
-  console.log('################################', action);
+  console.log('################################', action.type);
   switch (action.type) {
     case (ACTION_TYPES.UPDATE_LOCATION):
       console.log('update location received', action);
@@ -28,7 +28,6 @@ const appReducer = (state = INITIAL_STATE, action) => {
         csvFiles: action.csvFiles,
       });
     case (ACTION_TYPES.UPDATE_STATION_LIST):
-      console.log('in reducer', action);
       return ({
         stations: action.stations,
       });

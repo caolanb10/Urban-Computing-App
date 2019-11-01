@@ -4,19 +4,13 @@ import { Accuracy, watchPositionAsync } from 'expo-location';
 import Home from './Home';
 import { actionCreators } from '../../redux';
 
-const sampleStation = (name) => ({
-  name,
-  lat: -2,
-  long: 2,
-});
-
 const mapStateToProps = ({
   app: {
     stations, longitude, latitude, time,
   },
 }) => ({
-  allStations: [sampleStation('Malahide'), sampleStation('Sutton'), sampleStation('Connolly')],
-  nearbyStations: [sampleStation('Pearse'), sampleStation('Talbot'), sampleStation('Connolly')],
+  allStations: stations,
+  nearbyStations: stations ? stations.slice(0, 5) : [],
   longitude,
   latitude,
   time,
@@ -28,21 +22,30 @@ const mapDispatchToProps = (dispatch, { navigation: { dispatch: navDispatch } })
 });
 
 const initialState = {
-  stopLocationTracking: null,
+  locationTracker: null,
+  isTracking: false,
 };
 
 const stateHandlers = {
-  locationTracker: () => ({ func }) => ({ stopLocationTracking: func }),
+  startLocationTracking: () => ({ func }) => ({
+    locationTracker: func,
+    isTracking: true,
+  }),
+  stopLocationTracking: () => () => ({
+    locationTracker: null,
+    isTracking: false,
+  }),
 };
 
 const handlers = {
-  startWatchingLocation: ({ locationHandler, locationTracker }) => () => {
-    const call = watchPositionAsync({ accuracy: Accuracy.Highest, timeInterval: 500 },
+  startWatchingLocation: ({ locationHandler, startLocationTracking }) => async () => {
+    const call = await watchPositionAsync({ accuracy: Accuracy.Highest, timeInterval: 500 },
       locationHandler);
-    locationTracker({ func: call });
+    startLocationTracking({ func: call });
   },
-  stopWatchingLocation: ({ locationTracker }) => () => {
+  stopWatchingLocation: ({ locationTracker, stopLocationTracking }) => () => {
     locationTracker.remove();
+    stopLocationTracking();
   },
 };
 
