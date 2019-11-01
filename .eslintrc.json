@@ -22,6 +22,7 @@
     ],
     "rules": {
         "react/jsx-filename-extension": 0,
-        "spaced-comment": 0
+        "spaced-comment": 0,
+        "linebreak-style": 0
     }
 }
