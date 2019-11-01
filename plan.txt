@@ -1,0 +1,9 @@
+I have data for start and end of journey, between certain stops.
+
+Can calculate total time of journey.
+
+Need to know what route they are taking, can query route. 
+
+AFAIK static time differential based on stop distance used for real time information. 
+
+Goal: Report shortest time of commute for a given month.
