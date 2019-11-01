@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
 export default {
-  NORTHBOUND: 'NORTHBOUND',
-  SOUTHBOUND: 'SOUTHBOUND',
+  NORTHBOUND: 'Northbound',
+  SOUTHBOUND: 'Southbound',
 };
 
 export const TrainPropType = PropTypes.shape({
