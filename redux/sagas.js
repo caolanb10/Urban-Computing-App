@@ -19,9 +19,7 @@ function* readStationData() {
 }
 
 function* fetchStationData({ station }) {
-  console.log('----- received action', station);
   const stationData = yield call(requests.getStationDataByName, { name: station });
-  console.log('-------station data', stationData);
   yield put(actionCreators.receivedData({ stationData, station }));
 }
 

@@ -13,7 +13,7 @@ const Station = ({
   station,
   northBoundData,
   southBoundData,
-}) => console.log('presentational component', northBoundData) || (
+}) => (
   <ScrollView>
     <Card title={NORTHBOUND}>
       {northBoundData.map((train) => (
