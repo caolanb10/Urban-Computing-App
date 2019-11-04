@@ -1,6 +1,7 @@
 import { compose, withHandlers, withStateHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { Accuracy, watchPositionAsync } from 'expo-location';
+import * as Permissions from 'expo-permissions';
 import Home from './Home';
 import { actionCreators } from '../../redux';
 
@@ -39,6 +40,8 @@ const stateHandlers = {
 
 const handlers = {
   startWatchingLocation: ({ locationHandler, startLocationTracking }) => async () => {
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    console.log(status);
     const call = await watchPositionAsync({ accuracy: Accuracy.Highest, timeInterval: 500 },
       locationHandler);
     startLocationTracking({ func: call });

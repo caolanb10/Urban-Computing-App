@@ -22,6 +22,7 @@ function* readStationData() {
 function* fetchStationData({ station }) {
   const stationData = yield call(requests.getStationDataByName, { name: station });
   yield put(actionCreators.receivedData({ stationData, station }));
+  yield call(Database.postToDB, { data: stationData, table: constants.STATION_REQUESTS });
 }
 
 function* updateLocation({
