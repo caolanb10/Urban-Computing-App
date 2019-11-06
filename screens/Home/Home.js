@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import DropDown from 'react-native-modal-dropdown';
 import { Card, Button } from 'react-native-elements';
 import MapView, { Marker, Circle } from 'react-native-maps';

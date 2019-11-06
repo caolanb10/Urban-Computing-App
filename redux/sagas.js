@@ -7,7 +7,6 @@ import { actionCreators, ACTION_TYPES } from './actions';
 
 function* fetchAllStationData() {
   const stationData = yield call(requests.getAllStations);
-  yield call(Database.setToDB, { data: stationData, table: constants.STATION_LIST });
   const formattedData = stationData.map(
     (station) => ({ ...station, StationDesc: _.capitalize(station.StationDesc) }),
   );
@@ -19,6 +18,7 @@ function* fetchAllStationData() {
     if (first > second) return 1;
     return 0;
   });
+  yield call(Database.setToDB, { data: sortedData, table: constants.STATION_LIST });
   yield put(actionCreators.updateStationList({ stations: sortedData }));
 }
 
@@ -45,19 +45,11 @@ function* updateLocation({
   yield call(Database.postToDB, { data: location, table: constants.LOCATION_UPDATES });
 }
 
-function* watchForStationRoute() {
-  yield takeEvery(ACTION_TYPES.NAV.STATION, fetchStationData);
-}
-
-function* watchForUserLocationUpdate() {
-  yield takeEvery(ACTION_TYPES.UPDATE_LOCATION, updateLocation);
-}
-
 export default function* rootSaga() {
   yield all([
     fetchAllStationData(),
-    watchForStationRoute(),
-    watchForUserLocationUpdate(),
     readStationData(),
+    yield takeEvery(ACTION_TYPES.NAV.STATION, fetchStationData),
+    yield takeEvery(ACTION_TYPES.UPDATE_LOCATION, updateLocation),
   ]);
 }
