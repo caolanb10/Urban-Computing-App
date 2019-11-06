@@ -1,14 +1,25 @@
 import {
   put, all, call, takeEvery,
 } from 'redux-saga/effects';
+import * as _ from 'lodash';
 import { requests, constants, Database } from '../Firebase';
 import { actionCreators, ACTION_TYPES } from './actions';
-
 
 function* fetchAllStationData() {
   const stationData = yield call(requests.getAllStations);
   yield call(Database.setToDB, { data: stationData, table: constants.STATION_LIST });
-  yield put(actionCreators.updateStationList({ stations: stationData }));
+  const formattedData = stationData.map(
+    (station) => ({ ...station, StationDesc: _.capitalize(station.StationDesc) }),
+  );
+  const sortedData = formattedData.sort((firstEl, secondEl) => {
+    const first = firstEl.StationDesc.toUpperCase();
+    const second = secondEl.StationDesc.toUpperCase();
+    console.log('in func', first, second);
+    if (first < second) return -1;
+    if (first > second) return 1;
+    return 0;
+  });
+  yield put(actionCreators.updateStationList({ stations: sortedData }));
 }
 
 function* readStationData() {

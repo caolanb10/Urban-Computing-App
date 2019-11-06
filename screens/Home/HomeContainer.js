@@ -7,14 +7,16 @@ import { actionCreators } from '../../redux';
 
 const mapStateToProps = ({
   app: {
-    stations, longitude, latitude, time,
+    stations, longitude, latitude, time, accuracy,
   },
 }) => ({
   allStations: stations,
   nearbyStations: stations ? stations.slice(0, 5) : [],
   longitude,
   latitude,
+  accuracy,
   time,
+  haveUserLocation: !!latitude,
 });
 
 const mapDispatchToProps = (dispatch, { navigation: { dispatch: navDispatch } }) => ({
