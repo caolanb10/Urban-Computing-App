@@ -1,33 +1,12 @@
 import {
   put, all, call, takeEvery,
 } from 'redux-saga/effects';
-import * as _ from 'lodash';
-import { requests, constants, Database } from '../Firebase';
+import { requests, constants, Database, reduxSagaFirebase } from '../Firebase';
 import { actionCreators, ACTION_TYPES } from './actions';
 
 function* fetchAllStationData() {
-  const stationData = yield call(requests.getAllStations);
-  const formattedData = stationData.map(
-    (station) => ({ ...station, StationDesc: _.capitalize(station.StationDesc) }),
-  );
-  const sortedData = formattedData.sort((firstEl, secondEl) => {
-    const first = firstEl.StationDesc.toUpperCase();
-    const second = secondEl.StationDesc.toUpperCase();
-    console.log('in func', first, second);
-    if (first < second) return -1;
-    if (first > second) return 1;
-    return 0;
-  });
-  yield call(Database.setToDB, { data: sortedData, table: constants.STATION_LIST });
-  yield put(actionCreators.updateStationList({ stations: sortedData }));
-}
-
-function* readStationData() {
-  const stationArg = { table: constants.STATION_LIST };
-  const databaseReference = yield call(Database.ref, stationArg);
-  let stationDataVar;
-  yield call(databaseReference.on('value', (stationData) => { stationDataVar = stationData; }));
-  yield put(actionCreators.updateStationList({ stations: stationDataVar }));
+  const stationData = yield call(reduxSagaFirebase.database.read, constants.STATION_LIST);
+  yield put(actionCreators.updateStationList({ stations: stationData }));
 }
 
 function* fetchStationData({ station }) {
@@ -48,7 +27,6 @@ function* updateLocation({
 export default function* rootSaga() {
   yield all([
     fetchAllStationData(),
-    readStationData(),
     yield takeEvery(ACTION_TYPES.NAV.STATION, fetchStationData),
     yield takeEvery(ACTION_TYPES.UPDATE_LOCATION, updateLocation),
   ]);

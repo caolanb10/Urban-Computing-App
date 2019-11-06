@@ -5,18 +5,9 @@ import * as Permissions from 'expo-permissions';
 import Home from './Home';
 import { actionCreators } from '../../redux';
 
-const mapStateToProps = ({
-  app: {
-    stations, longitude, latitude, time, accuracy,
-  },
-}) => ({
+const mapStateToProps = ({ app: { stations } }) => ({
   allStations: stations,
   nearbyStations: stations ? stations.slice(0, 5) : [],
-  longitude,
-  latitude,
-  accuracy,
-  time,
-  haveUserLocation: !!latitude,
 });
 
 const mapDispatchToProps = (dispatch, { navigation: { dispatch: navDispatch } }) => ({

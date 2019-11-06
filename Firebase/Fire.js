@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import ReduxSagaFirebase from 'redux-saga-firebase';
 
 export const app = firebase.initializeApp({
   apiKey: 'AIzaSyA8NigRryFu6RCagi6JS1-lnYLyqyQwCVI',
@@ -9,6 +10,8 @@ export const app = firebase.initializeApp({
   messagingSenderId: '715635169669',
   appId: '1:715635169669:web:68b4355735f376d4f1ccec',
 });
+
+export const reduxSagaFirebase = new ReduxSagaFirebase(app);
 
 export const observeAuth = () => firebase.auth().onAuthStateChanged((user) => {
   if (!user) {

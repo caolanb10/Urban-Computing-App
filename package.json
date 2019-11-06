@@ -42,6 +42,7 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
+    "redux-saga-firebase": "^0.15.0",
     "xml-parser": "^1.2.1",
     "yarn": "^1.19.1"
   },
