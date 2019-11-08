@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 };
 
 const appReducer = (state = INITIAL_STATE, action) => {
-  console.log('################################', state, action.type);
+  console.log('################################', action.type);
   switch (action.type) {
     case (ACTION_TYPES.UPDATE_LOCATION):
       return ({
