@@ -27,12 +27,12 @@ const initialState = {
 };
 
 const stateHandlers = {
-   changeRegion: () => (region) => ({ mapCoordinates: region }),
+  changeRegion: () => (region) => ({ mapCoordinates: region }),
 };
 
 
 export default compose(
   withNavigation,
   connect(mapStateToProps, mapDispatchToProps),
- withStateHandlers(initialState, stateHandlers),
+  withStateHandlers(initialState, stateHandlers),
 )(StationMap);

@@ -5,7 +5,7 @@ import StationDropdown from './StationDropdown';
 import { actionCreators } from '../../redux';
 
 const mapDispatchToProps = (dispatch, { navigation: { dispatch: navDispatch } }) => ({
-  stationNavigationHandler: (_, x) => actionCreators.navigateToStation({ navDispatch, dispatch }, x),
+  stationNavigationHandler: (x) => x ? actionCreators.navigateToStation({ navDispatch, dispatch }, x) : null,
 });
 
 const mapStateToPropsAllStations = ({ app: { stations } }) => ({

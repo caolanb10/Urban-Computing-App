@@ -19,17 +19,18 @@ const appReducer = (state = INITIAL_STATE, action) => {
   console.log('################################', action.type);
   switch (action.type) {
     case (ACTION_TYPES.UPDATE_LOCATION):
+      let nearbyStations = getNearbyStations({
+        long: action.longitude,
+        lat: action.latitude,
+        nearbyStations: state.nearbyStations,
+      });
       return ({
         ...state,
         latitude: action.latitude,
         longitude: action.longitude,
         accuracy: action.accuracy,
         time: action.time,
-        nearbyStations: getNearbyStations({
-          long: action.longitude,
-          lat: action.latitude,
-          nearbyStations: state.nearbyStations,
-        }),
+        nearbyStations,
       });
     case (ACTION_TYPES.UPDATE_CSV_FILES):
       return ({
