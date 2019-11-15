@@ -34,5 +34,5 @@ const stateHandlers = {
 export default compose(
   withNavigation,
   connect(mapStateToProps, mapDispatchToProps),
-  withStateHandlers(initialState, stateHandlers),
+ withStateHandlers(initialState, stateHandlers),
 )(StationMap);
