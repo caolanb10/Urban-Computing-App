@@ -27,7 +27,7 @@ const initialState = {
 };
 
 const stateHandlers = {
-  changeRegion: () => (region) => ({ mapCoordinates: region }),
+   changeRegion: () => (region) => ({ mapCoordinates: region }),
 };
 
 

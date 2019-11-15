@@ -2,6 +2,7 @@ import React from 'react';
 import { ListItem } from 'react-native-elements';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import { TrainPropType } from '../../constants';
 import styles from './TrainItemStyles';
 
 
@@ -16,9 +17,7 @@ const TrainItem = ({
   train: {
     Duein,
     Destination,
-    Late,
     Lastlocation,
-    Exparrival,
     Traincode,
   },
 }) => (
@@ -41,6 +40,10 @@ const TrainItem = ({
   </View>
 );
 
-TrainItem.propTypes = {};
+TrainItem.propTypes = {
+  expand: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  train: TrainPropType.isRequired,
+};
 
 export default TrainItem;

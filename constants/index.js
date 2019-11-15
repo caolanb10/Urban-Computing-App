@@ -1,11 +1,6 @@
 import PropTypes from 'prop-types';
 
-export default {
-  NORTHBOUND: 'Northbound',
-  SOUTHBOUND: 'Southbound',
-};
-
-export const TrainPropType = PropTypes.shape({
+const TrainPropType = PropTypes.shape({
   Destination: PropTypes.string.isRequired,
   Destinationtime: PropTypes.string.isRequired,
   Direction: PropTypes.string.isRequired,
@@ -28,3 +23,18 @@ export const TrainPropType = PropTypes.shape({
   Traindate: PropTypes.string.isRequired,
   Traintype: PropTypes.string.isRequired,
 });
+
+const StationPropTypes = PropTypes.shape({
+  StationAlias: PropTypes.string,
+  StationCode: PropTypes.string.isRequired,
+  StationDesc: PropTypes.string.isRequired,
+  StationId: PropTypes.string.isRequired,
+  StationLatitude: PropTypes.string.isRequired,
+  StationLongitude: PropTypes.string.isRequired,
+});
+
+const StationsPropTypes = PropTypes.arrayOf(
+  StationPropTypes,
+);
+
+export { TrainPropType, StationsPropTypes };

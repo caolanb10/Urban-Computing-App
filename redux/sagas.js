@@ -11,8 +11,24 @@ function* fetchAllStationData() {
 
 function* fetchStationData({ station }) {
   const stationData = yield call(requests.getStationDataByName, { name: station });
-  yield put(actionCreators.receivedData({ stationData, station }));
-  yield call(Database.postToDB, { data: stationData, table: constants.STATION_REQUESTS });
+
+  // Find all directions listed in data
+
+  const directionSet = new Set();
+  stationData.forEach((train) => directionSet.add(train.Direction));
+  const directionArray = [];
+  directionSet.forEach((_, direction) => directionArray.push(direction));
+
+
+  yield put(actionCreators.receivedData({
+    stationData,
+    station,
+    directions: directionArray,
+  }));
+  yield call(Database.postToDB, {
+    data: stationData,
+    table: constants.STATION_REQUESTS,
+  });
 }
 
 function* updateLocation({

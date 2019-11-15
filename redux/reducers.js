@@ -1,19 +1,22 @@
 import { combineReducers } from 'redux';
 import { ACTION_TYPES } from './actions';
+import getNearbyStations from '../getNearbyStations';
 
 const INITIAL_STATE = {
   csvFiles: [],
-  stations: [],
+  stations: undefined,
   latitude: undefined,
   longitude: undefined,
   accuracy: undefined,
   time: '',
-  stationData: [],
+  stationData: undefined,
   station: '',
+  directions: [],
+  nearbyStations: [],
 };
 
 const appReducer = (state = INITIAL_STATE, action) => {
-  console.log('################################', state, action.type);
+  console.log('################################', action.type);
   switch (action.type) {
     case (ACTION_TYPES.UPDATE_LOCATION):
       return ({
@@ -22,6 +25,11 @@ const appReducer = (state = INITIAL_STATE, action) => {
         longitude: action.longitude,
         accuracy: action.accuracy,
         time: action.time,
+        nearbyStations: getNearbyStations({
+          long: action.longitude,
+          lat: action.latitude,
+          nearbyStations: state.nearbyStations,
+        }),
       });
     case (ACTION_TYPES.UPDATE_CSV_FILES):
       return ({
@@ -32,12 +40,14 @@ const appReducer = (state = INITIAL_STATE, action) => {
       return ({
         ...state,
         stations: action.stations,
+        nearbyStations: [...action.stations],
       });
     case (ACTION_TYPES.RECEIVED_DATA):
       return ({
         ...state,
         stationData: action.stationData,
         station: action.station,
+        directions: action.directions,
       });
     default:
       return state;

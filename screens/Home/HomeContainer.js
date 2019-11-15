@@ -5,14 +5,13 @@ import * as Permissions from 'expo-permissions';
 import Home from './Home';
 import { actionCreators } from '../../redux';
 
-const mapStateToProps = ({ app: { stations } }) => ({
+const mapStateToProps = ({ app: { stations, nearbyStations } }) => ({
   allStations: stations,
-  nearbyStations: stations ? stations.slice(0, 5) : [],
+  nearbyStations,
 });
 
-const mapDispatchToProps = (dispatch, { navigation: { dispatch: navDispatch } }) => ({
+const mapDispatchToProps = (dispatch) => ({
   locationHandler: (x) => dispatch(actionCreators.updateLocation(x)),
-  stationNavigationHandler: (_, x) => actionCreators.navigateToStation({ navDispatch, dispatch }, x),
 });
 
 const initialState = {

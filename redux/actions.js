@@ -30,7 +30,7 @@ export const actionCreators = {
   updateStationList: ({ stations }) => ({ type: ACTION_TYPES.UPDATE_STATION_LIST, stations }),
   triggerUpdateCSVFiles: () => ({ type: ACTION_TYPES.TRIGGER_UPDATE_CSV_FILES }),
   newLocation: (location) => ({ type: ACTION_TYPES.NEW_LOCATION, location }),
-  receivedData: ({ stationData, station }) => ({ type: ACTION_TYPES.RECEIVED_DATA, stationData, station }),
+  receivedData: ({ stationData, station, directions }) => ({ type: ACTION_TYPES.RECEIVED_DATA, stationData, station, directions }),
   updateLocation: ({
     coords: { latitude, longitude, accuracy }, timestamp,
   }) => ({

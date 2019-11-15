@@ -8,7 +8,6 @@ const StationMap = ({
   longitude,
   latitude,
   haveUserLocation,
-  changeRegion,
   mapCoordinates,
   stationNavigationHandler,
 }) => (
@@ -18,7 +17,6 @@ const StationMap = ({
     region={haveUserLocation ? {
       longitude, latitude, latitudeDelta: 0.01, longitudeDelta: 0.01,
     } : mapCoordinates}
-    onRegionChange={changeRegion}
   >
     {allStations ? allStations.map((station) => (
       <Marker
@@ -56,7 +54,6 @@ StationMap.propTypes = {
     longitudeDelta: PropTypes.number.isRequired,
     latitudeDelta: PropTypes.number.isRequired,
   }).isRequired,
-  changeRegion: PropTypes.func.isRequired,
   allStations: stationsPropTypes,
   stationNavigationHandler: PropTypes.func.isRequired,
 };
