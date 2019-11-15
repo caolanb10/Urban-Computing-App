@@ -16,6 +16,7 @@ export const ACTION_TYPES = {
 
 const navigateActions = {
   navigateToStation: ({ navDispatch, dispatch }, station) => {
+    if (!station) return;
     dispatch({ type: ACTION_TYPES.NAV.STATION, station });
     navDispatch(NavigationActions.navigate({
       routeName: 'Station',
