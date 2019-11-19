@@ -8,12 +8,12 @@ const mapDispatchToProps = (dispatch, { navigation: { dispatch: navDispatch } })
   stationNavigationHandler: (station) => actionCreators.navigateToStation({ navDispatch, dispatch }, station),
 });
 
-const mapStateToPropsAllStations = ({ app: { stations } }) => ({
+const mapStateToProps = ({ app: { stations } }) => ({
   stations,
   title: 'All Stations',
 });
 
 export default compose(
   withNavigation,
-  connect(mapStateToPropsAllStations, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(StationDropdown);
