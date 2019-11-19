@@ -43,6 +43,7 @@
     "redux-saga": "^1.1.1",
     "redux-saga-firebase": "^0.15.0",
     "uglify-es": "3.2.2",
+    "ws": "^7.2.0",
     "xml-parser": "^1.2.1",
     "yarn": "^1.19.1"
   },
