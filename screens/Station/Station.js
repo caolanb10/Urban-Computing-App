@@ -11,12 +11,12 @@ const Station = ({
   station,
   directions,
   stationDataByDirection,
-}) => console.log(directions) || (
+}) => (
   <ScrollView>
     {directions.length > 0 ? directions.map((direction, index) => (
       <Card title={direction} key={direction}>
         {stationDataByDirection[index].map((train) => (
-          <TrainItem train={train} key={train.Traincode}/>
+          <TrainItem train={train} key={train.Traincode} />
         ))}
       </Card>
     )) : null}

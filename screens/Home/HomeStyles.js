@@ -7,10 +7,16 @@ const phoneWidth = Dimensions.get('window').width;
 export default StyleSheet.create({
   dropdownButtonStyle: {
   },
-  cardStyle: {
+  stationList: {
+    height: phoneHeight / 2,
+    padding: 10,
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  mapContainer: {
     height: phoneHeight / 2,
   },
-
   mapView: {
     width: phoneWidth,
     height: phoneHeight / 2,

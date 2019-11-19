@@ -8,6 +8,7 @@ export const ACTION_TYPES = {
   UPDATE_STATION_LIST: 'UPDATE_STATION_LIST',
   FETCH_STATION_LIST: 'FETCH_STATION_LIST',
   RECEIVED_DATA: 'RECEIVED_DATA',
+  TOP_NEAREST_STATIONS_DATA: 'TOP_NEAREST_STATIONS_DATA',
   NAV: {
     STATION: 'NAV_STATION',
   },
@@ -27,10 +28,22 @@ const navigateActions = {
 
 export const actionCreators = {
   ...navigateActions,
-  fetchStationList: () => ({ type: ACTION_TYPES.FETCH_STATION_LIST }),
-  updateStationList: ({ stations }) => ({ type: ACTION_TYPES.UPDATE_STATION_LIST, stations }),
-  triggerUpdateCSVFiles: () => ({ type: ACTION_TYPES.TRIGGER_UPDATE_CSV_FILES }),
-  receivedData: ({ stationData, station, directions }) => ({ type: ACTION_TYPES.RECEIVED_DATA, stationData, station, directions }),
+  fetchStationList: () => ({
+    type: ACTION_TYPES.FETCH_STATION_LIST,
+  }),
+  updateStationList: ({ stations }) => ({
+    type: ACTION_TYPES.UPDATE_STATION_LIST,
+    stations,
+  }),
+  triggerUpdateCSVFiles: () => ({
+    type: ACTION_TYPES.TRIGGER_UPDATE_CSV_FILES,
+  }),
+  receivedData: ({ stationData, station, directions }) => ({
+    type: ACTION_TYPES.RECEIVED_DATA,
+    stationData,
+    station,
+    directions,
+  }),
   updateLocation: ({
     coords: { latitude, longitude, accuracy }, timestamp,
   }) => ({
@@ -43,5 +56,9 @@ export const actionCreators = {
   updateCSVFiles: ({ csvFiles }) => ({
     type: ACTION_TYPES.UPDATE_CSV_FILES,
     csvFiles,
+  }),
+  fiveNearestStationsData: ({ nearStationData }) => ({
+    type: ACTION_TYPES.TOP_NEAREST_STATIONS_DATA,
+    nearStationData,
   }),
 };

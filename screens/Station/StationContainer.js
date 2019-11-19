@@ -7,7 +7,6 @@ const getStationDataByDirection = ({ stationData, directions }) => {
   directions.forEach((direction) => {
     directionArray.push(stationData.filter((train) => (train.Direction === direction)));
   });
-  console.log(directionArray);
   return (directionArray);
 };
 

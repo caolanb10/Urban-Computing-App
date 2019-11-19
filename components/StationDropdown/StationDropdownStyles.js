@@ -4,11 +4,12 @@ const phoneHeight = Dimensions.get('window').height;
 const phoneWidth = Dimensions.get('window').width;
 
 export default StyleSheet.create({
-  innerCardStyle: {
-
+  pickerStyle: {
+    width: phoneWidth / 1.5,
+    height: 20,
   },
   dropdownStyle: {
-    width: phoneWidth / 1.5,
+    alignItems: 'center',
   },
   dropdownTextStyle: {
     fontSize: 18,

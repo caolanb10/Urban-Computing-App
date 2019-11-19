@@ -33,15 +33,19 @@ const stateHandlers = {
 const handlers = {
   startWatchingLocation: ({ locationHandler, startLocationTracking }) => async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
-    console.log(status);
-    const call = await watchPositionAsync({ accuracy: Accuracy.Highest, timeInterval: 500 },
-      locationHandler);
-    startLocationTracking({ func: call });
+    if (status) {
+      const call = await watchPositionAsync({ accuracy: Accuracy.Highest, timeInterval: 500 },
+        locationHandler);
+      startLocationTracking({ func: call });
+    } else {
+      console.log('Error: Permission not granted');
+    }
   },
   stopWatchingLocation: ({ locationTracker, stopLocationTracking }) => () => {
     locationTracker.remove();
     stopLocationTracking();
   },
+  navigationHandler: ({ navigation: { navigate } }) => () => navigate({ routeName: 'Visualisation' }),
 };
 
 export default compose(

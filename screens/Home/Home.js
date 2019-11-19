@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import styles from './HomeStyles';
-import { StationMap, NearbyStations, AllStations } from '../../components';
+import {
+  StationMap, NearbyStations, AllStations,
+} from '../../components';
 
 
 const Home = ({
   isTracking,
   startWatchingLocation,
   stopWatchingLocation,
+  navigationHandler,
 }) => (
   <View>
-    <Card containerStyle={styles.cardStyle}>
+    <View style={styles.stationList}>
       <Button
         type={isTracking ? 'outline' : 'solid'}
         containerStyle={{ margin: 15 }}
@@ -21,8 +24,16 @@ const Home = ({
       />
       <NearbyStations />
       <AllStations />
-    </Card>
-    <StationMap />
+      <Button
+        type="solid"
+        containerStyle={{ margin: 15 }}
+        onPress={navigationHandler}
+        title="How Late Are Nearby Trains ?"
+      />
+    </View>
+    <View style={styles.mapContainer}>
+      <StationMap />
+    </View>
   </View>
 );
 
