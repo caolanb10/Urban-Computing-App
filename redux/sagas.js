@@ -5,6 +5,7 @@ import {
   requests, constants, Database, reduxSagaFirebase,
 } from '../Firebase';
 import { actionCreators, ACTION_TYPES } from './actions';
+import { orderStationDataByDirection, getMetrics } from './util';
 
 function* fetchAllStationData() {
   const stationData = yield call(reduxSagaFirebase.database.read, constants.STATION_LIST);
@@ -14,21 +15,14 @@ function* fetchAllStationData() {
 function* fetchStationData({ station }) {
   const stationData = yield call(requests.getStationDataByName, { name: station });
 
-  // Find all directions listed in data
-
-  const directionSet = new Set();
-  stationData.forEach((train) => directionSet.add(train.Direction));
-  const directionArray = [];
-  directionSet.forEach((_, direction) => directionArray.push(direction));
-
-
-  yield put(actionCreators.receivedData({
-    stationData,
+  const formattedStationData = {
     station,
-    directions: directionArray,
-  }));
+    ...orderStationDataByDirection({ stationData }),
+  };
+
+  yield put(actionCreators.receivedData(formattedStationData));
   yield call(Database.postToDB, {
-    data: stationData,
+    data: formattedStationData,
     table: constants.STATION_REQUESTS,
   });
 }
@@ -42,18 +36,23 @@ function* updateLocation({
   yield call(Database.postToDB, { data: location, table: constants.LOCATION_UPDATES });
 }
 
-function* fetchNearbyStations() {
-  const top5NearbyStations = yield select(({ app: { nearbyStations } }) => (
-    nearbyStations.slice(0, 5)
+function* fetchNearbyStationData() {
+  const nearStation = yield select(({ app: { nearbyStations } }) => (
+    nearbyStations[0]
   ));
-  const dataArray = [];
-  for (let i = 0; i < top5NearbyStations.length; i++) {
-    const data = yield call(requests.getStationDataByName, {
-      name: top5NearbyStations[i].StationDesc,
-    });
-    dataArray.push(data);
-  }
-  yield put(actionCreators.fiveNearestStationsData({ nearStationData: dataArray }));
+  const nearStationData = yield call(requests.getStationDataByName, {
+    name: nearStation.StationDesc,
+  });
+
+  const formattedNearStationData = {
+    station: nearStation,
+    ...orderStationDataByDirection({ stationData: nearStationData }),
+  };
+
+  const lateMetrics = getMetrics(formattedNearStationData);
+
+  yield call(Database.postToDB, { data: lateMetrics, table: constants.NEAREST_STATION_DATA });
+  yield put(actionCreators.nearestStationsData({ nearStation, lateMetrics }));
 }
 
 export default function* rootSaga() {
@@ -61,6 +60,6 @@ export default function* rootSaga() {
     fetchAllStationData(),
     yield takeEvery(ACTION_TYPES.NAV.STATION, fetchStationData),
     yield takeEvery(ACTION_TYPES.UPDATE_LOCATION, updateLocation),
-    yield takeEvery(ACTION_TYPES.UPDATE_LOCATION, fetchNearbyStations),
+    yield takeEvery(ACTION_TYPES.UPDATE_LOCATION, fetchNearbyStationData),
   ]);
 }

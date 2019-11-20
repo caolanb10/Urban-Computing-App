@@ -1,5 +1,5 @@
 import React from 'react';
-import { Picker, View } from 'react-native';
+import { Picker, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { Card } from 'react-native-elements';
 import styles from './StationDropdownStyles';
@@ -10,7 +10,7 @@ const StationDropdown = ({
   stationNavigationHandler,
   title,
 }) => (
-  <Card style={styles.dropdownStyle} title={title}>
+  <Card containerStyle={styles.dropdownStyle} dividerStyle={styles.dividerStyle} title={title}>
     <Picker
       selectedValue={null}
       onValueChange={stationNavigationHandler}

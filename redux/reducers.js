@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   latitude: undefined,
   longitude: undefined,
   accuracy: undefined,
-  nearStationData: [],
+  lateMetrics: [],
   time: '',
   stationData: undefined,
   station: '',
@@ -50,10 +50,11 @@ const appReducer = (state = INITIAL_STATE, action) => {
         station: action.station,
         directions: action.directions,
       });
-    case (ACTION_TYPES.TOP_NEAREST_STATIONS_DATA):
+    case (ACTION_TYPES.NEAREST_STATION_DATA):
       return ({
         ...state,
-        nearStationData: action.nearStationData,
+        nearStation: action.nearStation,
+        lateMetrics: action.lateMetrics,
       });
     default:
       return state;

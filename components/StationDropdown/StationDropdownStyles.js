@@ -10,8 +10,13 @@ export default StyleSheet.create({
   },
   dropdownStyle: {
     alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
   },
   dropdownTextStyle: {
     fontSize: 18,
+  },
+  dividerStyle: {
+    height: 0,
   },
 });

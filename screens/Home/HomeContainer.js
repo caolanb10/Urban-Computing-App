@@ -17,6 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
 const initialState = {
   locationTracker: null,
   isTracking: false,
+  overlayActive: false,
 };
 
 const stateHandlers = {
@@ -27,6 +28,9 @@ const stateHandlers = {
   stopLocationTracking: () => () => ({
     locationTracker: null,
     isTracking: false,
+  }),
+  toggleOverlay: ({ overlayActive }) => () => ({
+    overlayActive: !overlayActive,
   }),
 };
 

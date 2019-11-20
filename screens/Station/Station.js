@@ -10,12 +10,12 @@ import styles from './StationStyles';
 const Station = ({
   station,
   directions,
-  stationDataByDirection,
+  stationData,
 }) => (
   <ScrollView>
     {directions.length > 0 ? directions.map((direction, index) => (
       <Card title={direction} key={direction}>
-        {stationDataByDirection[index].map((train) => (
+        {stationData[index].map((train) => (
           <TrainItem train={train} key={train.Traincode} />
         ))}
       </Card>
@@ -26,11 +26,11 @@ const Station = ({
 Station.propTypes = {
   station: PropTypes.string,
   directions: PropTypes.arrayOf(PropTypes.string),
-  stationDataByDirection: PropTypes.arrayOf(PropTypes.arrayOf(TrainPropType)),
+  stationData: PropTypes.arrayOf(PropTypes.arrayOf(TrainPropType)),
 };
 
 Station.defaultProps = {
-  stationDataByDirection: [[]],
+  stationData: [[]],
   station: '',
   directions: [''],
 };

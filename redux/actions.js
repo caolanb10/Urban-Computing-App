@@ -8,7 +8,7 @@ export const ACTION_TYPES = {
   UPDATE_STATION_LIST: 'UPDATE_STATION_LIST',
   FETCH_STATION_LIST: 'FETCH_STATION_LIST',
   RECEIVED_DATA: 'RECEIVED_DATA',
-  TOP_NEAREST_STATIONS_DATA: 'TOP_NEAREST_STATIONS_DATA',
+  NEAREST_STATION_DATA: 'NEAREST_STATION_DATA',
   NAV: {
     STATION: 'NAV_STATION',
   },
@@ -57,8 +57,12 @@ export const actionCreators = {
     type: ACTION_TYPES.UPDATE_CSV_FILES,
     csvFiles,
   }),
-  fiveNearestStationsData: ({ nearStationData }) => ({
-    type: ACTION_TYPES.TOP_NEAREST_STATIONS_DATA,
-    nearStationData,
+  nearestStationsData: ({
+    nearStation,
+    lateMetrics,
+  }) => ({
+    type: ACTION_TYPES.NEAREST_STATION_DATA,
+    lateMetrics,
+    nearStation,
   }),
 };

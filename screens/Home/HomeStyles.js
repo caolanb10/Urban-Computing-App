@@ -21,4 +21,16 @@ export default StyleSheet.create({
     width: phoneWidth,
     height: phoneHeight / 2,
   },
+  overlayStyle: {
+    width: phoneWidth / 1.3,
+    height: phoneHeight / 3,
+    flex: -1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  overlayTextStyle: {
+    fontSize: 20,
+    textAlign: 'center',
+  },
 });

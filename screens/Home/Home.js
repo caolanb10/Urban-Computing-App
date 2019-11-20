@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Overlay, Text } from 'react-native-elements';
 import styles from './HomeStyles';
 import {
   StationMap, NearbyStations, AllStations,
@@ -13,6 +13,8 @@ const Home = ({
   startWatchingLocation,
   stopWatchingLocation,
   navigationHandler,
+  toggleOverlay,
+  overlayActive,
 }) => (
   <View>
     <View style={styles.stationList}>
@@ -24,10 +26,17 @@ const Home = ({
       />
       <NearbyStations />
       <AllStations />
+      <Overlay
+        isVisible={overlayActive}
+        onBackdropPress={toggleOverlay}
+        overlayStyle={styles.overlayStyle}
+      >
+        <Text style={styles.overlayTextStyle}> Please First Find Stations Nearby </Text>
+      </Overlay>
       <Button
         type="solid"
         containerStyle={{ margin: 15 }}
-        onPress={navigationHandler}
+        onPress={isTracking ? navigationHandler : toggleOverlay}
         title="How Late Are Nearby Trains ?"
       />
     </View>
@@ -41,7 +50,7 @@ Home.propTypes = {
   isTracking: PropTypes.bool.isRequired,
   startWatchingLocation: PropTypes.func.isRequired,
   stopWatchingLocation: PropTypes.func.isRequired,
-
+  navigationHandler: PropTypes.func.isRequired,
 };
 
 export default Home;

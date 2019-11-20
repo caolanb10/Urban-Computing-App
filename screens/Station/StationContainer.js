@@ -2,14 +2,6 @@ import { compose, withStateHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import Station from './Station';
 
-const getStationDataByDirection = ({ stationData, directions }) => {
-  const directionArray = [];
-  directions.forEach((direction) => {
-    directionArray.push(stationData.filter((train) => (train.Direction === direction)));
-  });
-  return (directionArray);
-};
-
 const mapStateToProps = ({
   app: {
     stationData,
@@ -19,11 +11,7 @@ const mapStateToProps = ({
 }) => ({
   directions,
   station,
-  stationDataByDirection:
-    stationData ? getStationDataByDirection({
-      stationData,
-      directions,
-    }) : null,
+  stationData,
 });
 
 const initialState = {
