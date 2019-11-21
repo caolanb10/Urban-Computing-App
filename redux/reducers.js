@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ACTION_TYPES } from './actions';
-import getNearbyStations from './getNearbyStations';
+import { getNearbyStations } from './util';
 
 const INITIAL_STATE = {
   csvFiles: [],

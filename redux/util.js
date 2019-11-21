@@ -20,7 +20,12 @@ const orderStationDataByDirection = ({ stationData }) => {
 // Takes a list of train objects and returns the total lateness
 const totalLatenessForListOfTrains = (trains) => trains.reduce((acc, train) => acc + Number(train.Late), 0);
 
-const getMetrics = ({ station, directions, stationData }) => {
+// Use straight line distance to give nearest train station
+const getNearbyStations = ({ long, lat, nearbyStations }) => nearbyStations.sort((station1, station2) => Math.sqrt(((long - station1.StationLongitude) ** 2) + ((lat - station1.StationLatitude) ** 2))
+  - Math.sqrt(((long - station2.StationLongitude) ** 2) + ((lat - station2.StationLatitude) ** 2)));
+
+// Get lateness metrics for a given stations data
+const getMetrics = ({ directions, stationData }) => {
   const latenessByDirection = directions.map((val, index) => {
     const totalLateness = totalLatenessForListOfTrains(stationData[index]);
     const amountOfTrains = stationData[index].length;
@@ -35,4 +40,6 @@ const getMetrics = ({ station, directions, stationData }) => {
   return (latenessByDirection);
 };
 
-export { findAllDirections, orderStationDataByDirection, getMetrics };
+export {
+  findAllDirections, orderStationDataByDirection, getMetrics, getNearbyStations,
+};
