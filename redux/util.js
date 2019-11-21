@@ -25,7 +25,7 @@ const getNearbyStations = ({ long, lat, nearbyStations }) => nearbyStations.sort
   - Math.sqrt(((long - station2.StationLongitude) ** 2) + ((lat - station2.StationLatitude) ** 2)));
 
 // Get lateness metrics for a given stations data
-const getMetrics = ({ directions, stationData }) => {
+const getMetrics = ({ station, directions, stationData }) => {
   const latenessByDirection = directions.map((val, index) => {
     const totalLateness = totalLatenessForListOfTrains(stationData[index]);
     const amountOfTrains = stationData[index].length;
@@ -37,7 +37,7 @@ const getMetrics = ({ directions, stationData }) => {
       amountOfTrains,
     });
   });
-  return (latenessByDirection);
+  return ({ ...latenessByDirection, station });
 };
 
 export {

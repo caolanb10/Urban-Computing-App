@@ -27,6 +27,6 @@ export const ref = ({ table }) => firebase.database().ref(table);
 
 export const uid = () => (firebase.auth().currentUser || {}).uid;
 
-export const postToDB = ({ data, table }) => firebase.database().ref(table).push({ data });
+export const postToDB = ({ data, table }) => firebase.database().ref(table).push(data);
 
 export const setToDB = ({ data, table }) => firebase.database().ref(table).set(data);

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { Button, Overlay, Text } from 'react-native-elements';
+import Svg, { Rect, Circle } from 'react-native-svg';
 import styles from './HomeStyles';
 import {
   StationMap, NearbyStations, AllStations,
@@ -12,7 +13,7 @@ const Home = ({
   isTracking,
   startWatchingLocation,
   stopWatchingLocation,
-  navigationHandler,
+  visualisationNavigationHandler,
   toggleOverlay,
   overlayActive,
 }) => (
@@ -36,7 +37,7 @@ const Home = ({
       <Button
         type="solid"
         containerStyle={{ margin: 15 }}
-        onPress={isTracking ? navigationHandler : toggleOverlay}
+        onPress={isTracking ? visualisationNavigationHandler : toggleOverlay}
         title="How Late Are Nearby Trains ?"
       />
     </View>
@@ -50,7 +51,7 @@ Home.propTypes = {
   isTracking: PropTypes.bool.isRequired,
   startWatchingLocation: PropTypes.func.isRequired,
   stopWatchingLocation: PropTypes.func.isRequired,
-  navigationHandler: PropTypes.func.isRequired,
+  visualisationNavigationHandler: PropTypes.func.isRequired,
 };
 
 export default Home;

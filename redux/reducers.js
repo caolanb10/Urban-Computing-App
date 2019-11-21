@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   station: '',
   directions: [],
   nearbyStations: [],
+  metrics: undefined,
 };
 
 const appReducer = (state = INITIAL_STATE, action) => {
@@ -55,6 +56,12 @@ const appReducer = (state = INITIAL_STATE, action) => {
         ...state,
         nearStation: action.nearStation,
         lateMetrics: action.lateMetrics,
+      });
+    case (ACTION_TYPES.SET_METRICS):
+      console.log('here', action);
+      return ({
+        ...state,
+        metrics: action.metrics,
       });
     default:
       return state;

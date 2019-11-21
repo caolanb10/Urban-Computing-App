@@ -9,8 +9,10 @@ export const ACTION_TYPES = {
   FETCH_STATION_LIST: 'FETCH_STATION_LIST',
   RECEIVED_DATA: 'RECEIVED_DATA',
   NEAREST_STATION_DATA: 'NEAREST_STATION_DATA',
+  SET_METRICS: 'SET_METRICS',
   NAV: {
     STATION: 'NAV_STATION',
+    METRICS: 'METRICS',
   },
 };
 
@@ -22,6 +24,12 @@ const navigateActions = {
     navDispatch(NavigationActions.navigate({
       routeName: 'Station',
       params: { station },
+    }));
+  },
+  navigateToVisualisation: ({ navDispatch, dispatch }) => {
+    dispatch({ type: ACTION_TYPES.NAV.METRICS });
+    navDispatch(NavigationActions.navigate({
+      routeName: 'Visualisation',
     }));
   },
 };
@@ -64,5 +72,11 @@ export const actionCreators = {
     type: ACTION_TYPES.NEAREST_STATION_DATA,
     lateMetrics,
     nearStation,
+  }),
+  setMetrics: ({
+    metrics,
+  }) => ({
+    type: ACTION_TYPES.SET_METRICS,
+    metrics,
   }),
 };

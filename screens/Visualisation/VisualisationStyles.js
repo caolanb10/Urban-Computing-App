@@ -1,3 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-export default StyleSheet.create({});
+const { height, width } = Dimensions.get('window');
+
+export default StyleSheet.create({
+  container: {
+    height,
+    width,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 60,
+    paddingBottom: 110,
+  },
+  svgContainer: {
+  },
+});

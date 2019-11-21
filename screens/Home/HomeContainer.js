@@ -10,8 +10,9 @@ const mapStateToProps = ({ app: { stations, nearbyStations } }) => ({
   nearbyStations,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, { navigation: { dispatch: navDispatch }}) => ({
   locationHandler: (x) => dispatch(actionCreators.updateLocation(x)),
+  visualisationNavigationHandler: () => actionCreators.navigateToVisualisation({ navDispatch, dispatch }),
 });
 
 const initialState = {
@@ -49,7 +50,6 @@ const handlers = {
     locationTracker.remove();
     stopLocationTracking();
   },
-  navigationHandler: ({ navigation: { navigate } }) => () => navigate({ routeName: 'Visualisation' }),
 };
 
 export default compose(
