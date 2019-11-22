@@ -4,31 +4,55 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import Visualisation from './Visualisation';
 
-
-const formatLateMetrics = ({ lateMetrics, averageLateMetrics }) => {
-  const directionOneMetrics = lateMetrics[0];
-  const directionTwoMetrics = lateMetrics[1];
-  const averageDelayDirectionOne = averageLateMetrics[directionOneMetrics.direction];
-  const averageDelayDirectionTwo = averageLateMetrics[directionTwoMetrics.direction];
-};
-
 const mapStateToProps = ({
   app: {
     nearStation,
     lateMetrics,
     metrics,
   },
-}) => console.log(lateMetrics, metrics) || ({
-  averageDelayDirectionOne: metrics ? metrics.first.totalLateness / metrics.first.number : 0,
-  averageDelayDirectionTwo: metrics ? metrics.second.totalLateness / metrics.second.number : 0,
-  yourDelayDirectionOne: lateMetrics ? lateMetrics[0].averageLateness : 0,
-  yourDelayDirectionTwo: lateMetrics ? lateMetrics[1].averageLateness : 0,
-  nearStation,
-});
+}) => {
+  console.log('-----------', lateMetrics, metrics);
+  const directionOneAverageLateness = lateMetrics[0].averageLateness;
+  const directionTwoAverageLateness = lateMetrics[1].averageLateness;
+  const directionOne = lateMetrics[0].direction;
+  const directionTwo = lateMetrics[1].direction;
+  const directionOneAverageLatenessHistorical = metrics ? metrics.averageDirectionOne : 0;
+  const directionTwoAverageLatenessHistorical = metrics ? metrics.averageDirectionTwo : 0;
+  const maxDelay = Math.max(
+    directionOneAverageLatenessHistorical,
+    directionTwoAverageLatenessHistorical,
+    directionOneAverageLateness,
+    directionTwoAverageLateness,
+  );
+  return ({
+    stationName: nearStation.StationDesc,
+    directionOneAverageLateness,
+    directionTwoAverageLateness,
+    directionOneAverageLatenessHistorical,
+    directionTwoAverageLatenessHistorical,
+    directionOne,
+    directionTwo,
+    maxDelay,
+  });
+};
 
 const sample = ({
-  averageDelayDirectionOne, averageDelayDirectionTwo, yourDelayDirectionOne, yourDelayDirectionTwo,
-}) => (
+  stationName,
+  directionOneAverageLateness,
+  directionTwoAverageLateness,
+  directionOneAverageLatenessHistorical,
+  directionTwoAverageLatenessHistorical,
+  directionOne,
+  directionTwo,
+  maxDelay,
+}) => console.log('00000000000000000', stationName,
+  directionOneAverageLateness,
+  directionTwoAverageLateness,
+  directionOneAverageLatenessHistorical,
+  directionTwoAverageLatenessHistorical,
+  directionOne,
+  directionTwo,
+  maxDelay) || (
   <View />
 );
 

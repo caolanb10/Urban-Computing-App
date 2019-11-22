@@ -11,6 +11,9 @@ export default StyleSheet.create({
     paddingTop: 60,
     paddingBottom: 110,
   },
+  textStyle: {
+  },
   svgContainer: {
+    borderWidth: 2,
   },
 });
