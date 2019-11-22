@@ -58,7 +58,6 @@ const appReducer = (state = INITIAL_STATE, action) => {
         lateMetrics: action.lateMetrics,
       });
     case (ACTION_TYPES.SET_METRICS):
-      console.log('here', action);
       return ({
         ...state,
         metrics: action.metrics,

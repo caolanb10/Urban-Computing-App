@@ -11,7 +11,6 @@ const mapStateToProps = ({
     metrics,
   },
 }) => {
-  console.log('-----------', lateMetrics, metrics);
   const directionOneAverageLateness = lateMetrics[0].averageLateness;
   const directionTwoAverageLateness = lateMetrics[1].averageLateness;
   const directionOne = lateMetrics[0].direction;
@@ -35,26 +34,6 @@ const mapStateToProps = ({
     maxDelay,
   });
 };
-
-const sample = ({
-  stationName,
-  directionOneAverageLateness,
-  directionTwoAverageLateness,
-  directionOneAverageLatenessHistorical,
-  directionTwoAverageLatenessHistorical,
-  directionOne,
-  directionTwo,
-  maxDelay,
-}) => console.log('00000000000000000', stationName,
-  directionOneAverageLateness,
-  directionTwoAverageLateness,
-  directionOneAverageLatenessHistorical,
-  directionTwoAverageLatenessHistorical,
-  directionOne,
-  directionTwo,
-  maxDelay) || (
-  <View />
-);
 
 export default compose(
   connect(mapStateToProps),
